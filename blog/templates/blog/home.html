@@ -2,14 +2,14 @@
 
 {% block content %}
     {% for post in posts %}
-    <article class="media content-section bg-white p-2 mb-2 shadow-sm">
+    <article class="media content-section bg-white p-3 mb-3 shadow-sm">
         <div class="media-body">
-            <div class="article-metadata">
+            <div class="article-metadata d-flex align-items-center justify-content-between">
                 <a href="#" class="text-decoration-none fw-bold me-2">{{post.author}}</a>
-                <small class="text-secondary">{{post.date_posted}}</small>
+                <small class="text-secondary article-posted-date">{{post.date_posted|date:"F d, Y"}}</small>
             </div>
-            <h2 class="my-1"><a href="#" class="article-title text-decoration-none text-dark">{{post.title}}</a></h2>
-            <p class="article-content">{{post.content}}</p>
+            <h2 class="my-2"><a href="#" class="article-title text-decoration-none text-dark">{{post.title}}</a></h2>
+            <p class="article-content my-3">{{post.content|slice:"0:100"}}...</p>
         </div>
     </article>
     {% endfor %}
