@@ -10,3 +10,8 @@
 .article-posted-date {
 	font-size: 0.8rem;
 }
+
+#hint_id_password1,
+#hint_id_password2 {
+	display: none;
+}
