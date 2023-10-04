@@ -16,12 +16,22 @@
     {% include "blog/navbar.html" %}
     <main class="container my-3">
         <div class="row">
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
+                    <strong>{{message}}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% endfor %}
+            {% endif %}
             <div class="col-md-8">
                 {% block content %}
                 {% endblock content %}
             </div>
             <div class="col-md-4">
-                {% include "blog/sidebar.html" %}
+                {% if user.is_authenticated %}
+                    {% include "blog/sidebar.html" %}
+                {% endif %}
             </div>
         </div>
     </main>
