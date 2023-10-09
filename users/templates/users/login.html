@@ -5,13 +5,13 @@
     <div class="card bg-white p-3">
         <form method="POST">
             {% csrf_token %}
-            <h1>Join Today</h1>
+            <h1>Log In</h1>
             <hr>
             {{form|crispy}}
-            <button type="submit" class="btn btn-outline-primary">Register</button>
+            <button type="submit" class="btn btn-outline-primary">Login</button>
         </form>
         <hr>
-        <p class="mt-1">Already have an Account? <a href="{% url 'login_user' %}" class="text-decoration-none">Login</a> Instead</p>
+        <p class="mt-1">Need an Account? <a href="{% url 'register_user' %}" class="text-decoration-none">Register</a> Here</p>
     </div>
 {% endblock content %}
 

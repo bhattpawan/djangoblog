@@ -24,13 +24,14 @@
                   </div>
                 {% endfor %}
             {% endif %}
-            <div class="col-md-8">
+            <div class="col-md-7">
                 {% block content %}
                 {% endblock content %}
             </div>
+            <div class="col-md-1"></div>
             <div class="col-md-4">
                 {% if user.is_authenticated %}
-                    {% include "blog/sidebar.html" %}
+                    {% include "blog/sidebar.html" with sidebar_posts=sidebar_posts %}
                 {% endif %}
             </div>
         </div>

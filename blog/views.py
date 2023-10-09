@@ -5,7 +5,11 @@ from .models import Post
 # Create your views here.
 def home(request):
     posts = Post.objects.all()
-    context = {"posts": posts, "title": "Home"}
+    context = {
+        "posts": posts,
+        "title": "Home",
+        "sidebar_posts": posts.order_by("-last_modified"),
+    }
     return render(request, template_name="blog/home.html", context=context)
 
 

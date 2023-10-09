@@ -1,0 +1,19 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<section class="user-profile shadow shadow-sm">
+    <div class="profile-header">
+        <div class="media">
+            <img src="{{user.profile.image.url}}" class="profile-image" alt="{{user}} image">
+        </div>
+        <div class="media-body">
+            <div class="account-heading">
+            <h2>{{user.username}}</h2>
+            <p class="text-secondary">{{user.email}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+

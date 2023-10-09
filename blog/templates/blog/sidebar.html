@@ -1,10 +1,8 @@
 <aside class='bg-white rounded p-2 rounded d-none d-lg-block d-md-block'>
-    <h4>Sidebar</h4>
+    <h4>Latest Posts</h4>
     <ul class="list-group">
-        <li class="list-group-item">An item</li>
-        <li class="list-group-item">A second item</li>
-        <li class="list-group-item">A third item</li>
-        <li class="list-group-item">A fourth item</li>
-        <li class="list-group-item">And a fifth one</li>
+      {% for post in sidebar_posts %}      
+        <li class="list-group-item">{{post}}</li>
+      {% endfor %}
       </ul>
 </aside>

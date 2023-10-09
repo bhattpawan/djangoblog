@@ -15,3 +15,13 @@
 #hint_id_password2 {
 	display: none;
 }
+
+.profile-image {
+	width: 100px;
+	border-radius: 50%;
+}
+
+.nav-image {
+	width: 30px;
+	border-radius: 50%;
+}
