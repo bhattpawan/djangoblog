@@ -2,15 +2,15 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<section class="user-profile shadow shadow-sm">
-    <div class="profile-header">
+<section class="user-profile shadow shadow-sm p-3">
+    <div class="profile-header d-flex flex-column flex-lg-row align-items-center justify-content-center justify-content-lg-start align-items-sm-center gap-3">
         <div class="media">
-            <img src="{{user.profile.image.url}}" class="profile-image" alt="{{user}} image">
+            <img src="{{user.profile.image.url}}" class="profile-image" alt="{{user}} profile image">
         </div>
-        <div class="media-body">
+        <div class="media-body  text-center text-lg-start">
             <div class="account-heading">
-            <h2>{{user.username}}</h2>
-            <p class="text-secondary">{{user.email}}</p>
+                <h2>{{user.username|title}}</h2>
+                <p class="text-secondary">{{user.email}}</p>
             </div>
         </div>
     </div>

@@ -17,11 +17,23 @@
 }
 
 .profile-image {
-	width: 100px;
+	width: 80px;
+	height: 80px;
+	max-width: 80px;
+	max-height: 80px;
+	object-fit: contain;
 	border-radius: 50%;
+	border: 1px solid steelblue;
+	padding: 2px;
 }
 
 .nav-image {
 	width: 30px;
+	height: 30px;
+	max-width: 30px;
+	max-height: 30px;
 	border-radius: 50%;
+	object-fit: contain;
+	border: 1px solid white;
+	padding: 2px;
 }
