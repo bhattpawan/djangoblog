@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from blog.models import Post
+from django.contrib.auth.models import User
 
 
 def register(request):
@@ -21,23 +22,31 @@ def register(request):
 
 
 @login_required()
-def profile(request):
-    userUpdateForm = UserUpdateForm(instance=request.user)
-    profileUpdateForm = ProfileUpdateForm(instance=request.user.profile)
-    posts = Post.objects.filter(author=request.user)
-    if request.method == "POST":
-        userUpdateForm = UserUpdateForm(request.POST, instance=request.user)
-        profileUpdateForm = ProfileUpdateForm(
-            request.POST, request.FILES, instance=request.user.profile
-        )
-        if userUpdateForm.is_valid() and profileUpdateForm.is_valid():
-            userUpdateForm.save()
-            profileUpdateForm.save()
-            messages.success(request, "Profile Updated Successfully")
-            redirect("user_profile")
+def profile(request, pk):
+    user = User.objects.get(id=pk)
+    if str(pk) == str(request.user.id):
+        userUpdateForm = UserUpdateForm(instance=request.user)
+        profileUpdateForm = ProfileUpdateForm(instance=request.user.profile)
+        posts = Post.objects.filter(author=request.user)
+        if request.method == "POST":
+            userUpdateForm = UserUpdateForm(request.POST, instance=request.user)
+            profileUpdateForm = ProfileUpdateForm(
+                request.POST, request.FILES, instance=request.user.profile
+            )
+            if userUpdateForm.is_valid() and profileUpdateForm.is_valid():
+                userUpdateForm.save()
+                profileUpdateForm.save()
+                messages.success(request, "Profile Updated Successfully")
+                redirect("user_profile")
+    else:
+        userUpdateForm = None
+        profileUpdateForm = None
+        posts = Post.objects.filter(author=pk)
+
     context = {
         "userUpdateForm": userUpdateForm,
         "profileUpdateForm": profileUpdateForm,
         "sidebar_posts": posts,
+        "user": user,
     }
     return render(request, "users/profile.html", context=context)

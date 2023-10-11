@@ -15,14 +15,17 @@
         </div>
     </div>
     <div class="user-update-form my-4">
-        <form method="POST", enctype='multipart/form-data'>
-            {% csrf_token %}
-            <h4>Profile Info</h4>
-            <hr>
-            {{userUpdateForm|crispy}}
-            {{profileUpdateForm|crispy}}
-            <button type="submit" class="btn btn-outline-primary">Update</button>
-        </form>
+        {% if profileUpdateForm %}
+            <form method="POST", enctype='multipart/form-data'>
+                {% csrf_token %}
+                <h4>Profile Info</h4>
+                <hr>
+                {{userUpdateForm|crispy}}
+                {{profileUpdateForm|crispy}}
+                <button type="submit" class="btn btn-outline-primary">Update</button>
+            </form>
+        {% endif %}
+
     </div>
 </section>
 {% endblock content %}

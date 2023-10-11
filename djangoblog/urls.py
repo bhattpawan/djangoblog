@@ -9,6 +9,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("register/", user_views.register, name="register_user"),
     path("profile/", user_views.profile, name="user_profile"),
+    path("profile/<str:pk>/", user_views.profile, name="user_profile"),
     path(
         "login/",
         auth_views.LoginView.as_view(
