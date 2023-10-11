@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from blog.models import Post
 
 
 def register(request):
@@ -21,4 +22,22 @@ def register(request):
 
 @login_required()
 def profile(request):
-    return render(request, "users/profile.html")
+    userUpdateForm = UserUpdateForm(instance=request.user)
+    profileUpdateForm = ProfileUpdateForm(instance=request.user.profile)
+    posts = Post.objects.filter(author=request.user)
+    if request.method == "POST":
+        userUpdateForm = UserUpdateForm(request.POST, instance=request.user)
+        profileUpdateForm = ProfileUpdateForm(
+            request.POST, request.FILES, instance=request.user.profile
+        )
+        if userUpdateForm.is_valid() and profileUpdateForm.is_valid():
+            userUpdateForm.save()
+            profileUpdateForm.save()
+            messages.success(request, "Profile Updated Successfully")
+            redirect("user_profile")
+    context = {
+        "userUpdateForm": userUpdateForm,
+        "profileUpdateForm": profileUpdateForm,
+        "sidebar_posts": posts,
+    }
+    return render(request, "users/profile.html", context=context)
