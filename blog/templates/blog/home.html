@@ -2,13 +2,16 @@
 
 {% block content %}
     {% for post in posts %}
-    <article class="media content-section bg-white p-3 mb-3 shadow-sm">
+    <article class="media content-section bg-white d-flex gap-3 p-3 mb-3 shadow-sm">        
+        <div class="media align-self-start">
+            <img src="{{post.author.profile.image.url}}" class="profile-image profile-image-small" alt="{{post.author}} profile image">
+        </div>
         <div class="media-body">
             <div class="article-metadata d-flex align-items-center justify-content-between">
                 <a href="{% url 'user_profile' post.author.id %}" class="text-decoration-none fw-bold me-2">{{post.author}}</a>
                 <small class="text-secondary article-posted-date">{{post.date_posted|date:"F d, Y"}}</small>
             </div>
-            <h2 class="my-2"><a href="#" class="article-title text-decoration-none text-dark">{{post.title}}</a></h2>
+            <h2 class="my-2"><a href="{% url 'post-detail' post.id %}" class="article-title text-decoration-none text-dark">{{post.title}}</a></h2>
             <p class="article-content my-3">{{post.content|slice:"0:100"}}...</p>
         </div>
     </article>

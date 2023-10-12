@@ -1,0 +1,17 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    <article class="media content-section bg-white p-3 mb-3 shadow-sm">
+        <div class="media-body">
+            <div class="article-metadata d-flex align-items-center justify-content-between pb-2">
+                <div class="author-details">
+                    <img src="{{post.author.profile.image.url}}" class="profile-image profile-image-small" alt="{{post.author}} profile image">
+                    <a href="{% url 'user_profile' post.author.id %}" class="text-decoration-none fw-bold me-2">{{post.author}}</a>
+                </div>
+                <small class="text-secondary article-posted-date">{{post.date_posted|date:"F d, Y"}}</small>
+            </div>
+            <h1 class="my-2">{{post.title}}</h1>
+            <p class="article-content my-3">{{post.content}}</p>
+        </div>
+    </article>
+{% endblock content %}
