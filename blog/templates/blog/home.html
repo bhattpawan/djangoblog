@@ -6,10 +6,10 @@
         <div class="media align-self-start">
             <img src="{{post.author.profile.image.url}}" class="profile-image profile-image-small" alt="{{post.author}} profile image">
         </div>
-        <div class="media-body">
+        <div class="media-body w-100">
             <div class="article-metadata d-flex align-items-center justify-content-between">
                 <a href="{% url 'user_profile' post.author.id %}" class="text-decoration-none fw-bold me-2">{{post.author}}</a>
-                <small class="text-secondary article-posted-date">{{post.date_posted|date:"F d, Y"}}</small>
+                <small class="text-secondary flex-1 article-posted-date">{{post.date_posted|date:"F d, Y"}}</small>
             </div>
             <h2 class="my-2"><a href="{% url 'post-detail' post.id %}" class="article-title text-decoration-none text-dark">{{post.title}}</a></h2>
             <p class="article-content my-3">{{post.content|slice:"0:100"}}...</p>

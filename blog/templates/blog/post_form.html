@@ -1,0 +1,23 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="card bg-white p-3">
+        <form method="POST">
+            {% csrf_token %}
+            {% if form.instance and form.instance.pk %}
+            <h1>Update Post</h1>
+            {% else %}            
+            <h1>Create Post</h1>
+            {% endif %}
+            <hr>
+            {{form|crispy}}
+            {% if form.instance and form.instance.pk %}
+            <button type="submit" class="btn btn-outline-primary">Update</button>
+            {% else %}            
+            <button type="submit" class="btn btn-outline-primary">Create</button>
+            {% endif %}
+        </form>
+    </div>
+{% endblock content %}
+
