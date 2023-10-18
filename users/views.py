@@ -46,7 +46,8 @@ def profile(request, pk):
     context = {
         "userUpdateForm": userUpdateForm,
         "profileUpdateForm": profileUpdateForm,
-        "sidebar_posts": posts,
+        "sidebar_posts": posts.order_by("-date_posted")[:5],
+        "sidebar_posts_title": "Latest Posts by User",
         "user": user,
     }
     return render(request, "users/profile.html", context=context)

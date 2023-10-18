@@ -1,8 +1,11 @@
 <aside class='bg-white rounded p-2 rounded d-none d-lg-block d-md-block'>
-    <h4>Latest Updates</h4>
+    <h4>{{sidebar_posts_title}}</h4>
     <ul class="list-group">
       {% for post in sidebar_posts %}      
-        <li class="list-group-item">{{post}}</li>
+        <li class="list-group-item"><a class="text-decoration-none" href="{% url 'post-detail' post.id %}">{{post}}</a></li>
       {% endfor %}
+      {% if request.resolver_match.url_name == 'user_profile' %}
+        <li class="list-group-item text-center"><a class="text-decoration-none" href="{% url 'user-posts' user.username %}">View All</a></li>
+      {% endif %}
       </ul>
 </aside>
