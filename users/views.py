@@ -49,5 +49,6 @@ def profile(request, pk):
         "sidebar_posts": posts.order_by("-date_posted")[:5],
         "sidebar_posts_title": "Latest Posts by User",
         "user": user,
+        "user_posts": posts.order_by("-date_posted"),
     }
     return render(request, "users/profile.html", context=context)

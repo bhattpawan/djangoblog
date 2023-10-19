@@ -1,3 +1,5 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import (
     ListView,
@@ -31,17 +33,18 @@ class UserPostListView(ListView):
     template_name = "blog/home.html"
     context_object_name = "posts"
     ordering = ["-date_posted"]
-    paginate_by = 8
+    paginate_by = 5
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get("username"))
+        return Post.objects.filter(author=user).order_by("-date_posted")
 
     def get_context_data(self, **kwargs):
-        # context = super().get_context_data(**kwargs)
-        context = {}
-        user = get_object_or_404(User, username=self.kwargs.get("username"))
-        posts = Post.objects.filter(author=user).order_by("-date_posted")
+        context = super().get_context_data(**kwargs)
+        posts = context["posts"]
         context["sidebar_posts"] = posts[:5]
         context["posts"] = posts
         context["sidebar_posts_title"] = "Latest Posts By User"
-        context["title"] = "Home"
         context["username"] = self.kwargs.get("username")
         return context
 
