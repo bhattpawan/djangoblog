@@ -2,13 +2,14 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="card bg-white p-3">
+    <div class="card bg-white p-3 pb-1">
         <form method="POST">
             {% csrf_token %}
             <h1>Log In</h1>
             <hr>
             {{form|crispy}}
             <button type="submit" class="btn btn-outline-primary">Login</button>
+            <p class="mt-3 mb-0"> <a href="{% url 'password_reset' %}" class="text-decoration-none">Forgot password?</a></p>
         </form>
         <hr>
         <p class="mt-1">Need an Account? <a href="{% url 'register_user' %}" class="text-decoration-none">Register</a> Here</p>
