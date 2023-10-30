@@ -69,14 +69,17 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 
 class CommentCreateView(LoginRequiredMixin, CreateView):
-    http_method_names = ["post"]
+    http_method_names = ["post", "get"]
     model = Comment
     template_name = "blog/post_detail.html"
     fields = ["body"]
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        form.instance.post_id = post
+        form.instance.post_id = int(self.request.path_info.split("/")[-2])
+        # form.instance.post_id = self.request.path_info/split("/")
+        # print(self.request.post_id)
+        # form.instance.post_id = post
         return super().form_valid(form)
 
 

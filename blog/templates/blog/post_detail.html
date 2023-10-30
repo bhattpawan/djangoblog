@@ -24,7 +24,7 @@
         <div class="article-comments-wrapper my-3">
             <h6>Comments</h6>
             <div class="comment-form">
-                <form action="{% url 'post-comment' %}" method="POST">
+                <form action="{% url 'post-comment' post.id %}" method="POST">
                     {% csrf_token %}
                     {{comment_form|crispy}}
                     <button class="btn btn-sm btn-outline-primary mt-2" type="submit">Post Comment</button>
