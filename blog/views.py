@@ -10,6 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post, Comment
 from .forms import CommentForm
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 class PostListView(ListView):
@@ -53,7 +54,7 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["comments"] = Comment.objects.all()
+        context["comments"] = Comment.objects.filter(post=context["post"])
         context["comment_form"] = CommentForm()
         return context
 
@@ -69,17 +70,18 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 
 class CommentCreateView(LoginRequiredMixin, CreateView):
-    http_method_names = ["post", "get"]
+    http_method_names = ["post"]
     model = Comment
     template_name = "blog/post_detail.html"
     fields = ["body"]
 
+    def get_success_url(self):
+        post_id = int(self.request.path_info.split("/")[-2])
+        return reverse("post-detail", kwargs={"pk": post_id})
+
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.instance.post_id = int(self.request.path_info.split("/")[-2])
-        # form.instance.post_id = self.request.path_info/split("/")
-        # print(self.request.post_id)
-        # form.instance.post_id = post
         return super().form_valid(form)
 
 

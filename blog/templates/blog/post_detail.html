@@ -32,7 +32,7 @@
             </div>
             <div class="comments mt-3 bg-light p-2 rounded">
                 {% for comment in comments %}
-                <div class="comment-wrapper">
+                <div class="comment-wrapper mb-2">
                     <div class="d-flex align-items-center gap-2">
                         <img src="{{comment.user.profile.image.url}}" class="profile-image profile-image-small" alt="{{comment.user}} profile image">
                         <h6><a class="text-decoration-none" href="{% url 'user_profile' comment.user %}">{{comment.user}}</a></h6>
